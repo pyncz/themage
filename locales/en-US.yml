@@ -1,0 +1,14 @@
+errors:
+  default: Oops
+  noConnection: No connection
+  notFound: Not found
+  unexpected: We didn't expect it either
+goHome: Go to home page
+pages:
+  index:
+    description: Generate UI theme by image
+    title: '--themage'
+theme:
+  dark: Dark
+  light: Light
+  system: System
