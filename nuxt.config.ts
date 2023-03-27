@@ -38,6 +38,11 @@ export default defineNuxtConfig({
     '@nuxtjs/fontaine',
   ],
 
+  components: [
+    '~/components',
+    '~/components/_layouts',
+  ],
+
   i18n: {
     langDir: 'locales',
     locales: [
