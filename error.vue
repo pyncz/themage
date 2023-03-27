@@ -1,21 +1,19 @@
 <template>
-  <app-layout>
-    <message-layout>
-      <h1>
-        {{ title }}
-      </h1>
-      <div class="tw-space-y-1">
-        <p class="tw-text-2">
-          {{ message }}
-        </p>
-        <div>
-          <a role="button" @click="clearError({ redirect: '/' })">
-            {{ $t('goHome') }}
-          </a>
-        </div>
+  <message-layout>
+    <h1>
+      {{ title }}
+    </h1>
+    <div class="tw-space-y-2">
+      <p class="tw-text-2">
+        {{ message }}
+      </p>
+      <div>
+        <a role="button" @click="clearError({ redirect: '/' })">
+          {{ $t('goHome') }}
+        </a>
       </div>
-    </message-layout>
-  </app-layout>
+    </div>
+  </message-layout>
 </template>
 
 <script setup lang="ts">

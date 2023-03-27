@@ -1,5 +1,5 @@
 <template>
-  <footer class="tw-opacity-muted tw-flex tw-flex-col xs:tw-flex-row tw-gap-2 tw-items-center">
+  <footer class="tw-opacity-muted tw-flex tw-flex-col xs:tw-flex-row tw-gap-2 tw-text-center tw-items-center">
     <nav class="tw-inline-flex tw-gap-2">
       <a
         class="tw-text-lg tw-inline-flex"

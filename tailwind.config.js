@@ -151,5 +151,24 @@ module.exports = {
     plugin(addHeaders),
     plugin(addLayouts),
     plugin(addUtils),
+
+    ({ theme, addUtilities }) => {
+      addUtilities({
+        '.app-container': {
+          'display': 'flex',
+          'flexDirection': 'column',
+          'paddingRight': theme('padding[4]'),
+          'paddingLeft': theme('padding[4]'),
+          '@screen sm': {
+            paddingRight: theme('padding[6]'),
+            paddingLeft: theme('padding[6]'),
+          },
+          '@screen md': {
+            paddingRight: theme('padding[8]'),
+            paddingLeft: theme('padding[8]'),
+          },
+        },
+      })
+    },
   ],
 }

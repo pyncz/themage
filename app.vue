@@ -1,13 +1,12 @@
 <template>
   <nuxt-loading-indicator color="rgb(var(--c-accent-1))" />
-  <app-layout>
-    <nuxt-page v-if="isOnline" />
-    <message-layout v-else>
-      <p class="tw-text-2">
-        {{ $t('errors.noConnection') }}
-      </p>
-    </message-layout>
-  </app-layout>
+
+  <nuxt-page v-if="isOnline" />
+  <message-layout v-else>
+    <p class="tw-text-2">
+      {{ $t('errors.noConnection') }}
+    </p>
+  </message-layout>
 </template>
 
 <script setup lang="ts">
