@@ -1,0 +1,61 @@
+@use 'themes';
+@use 'fonts';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 16px; // 1rem
+    @apply tw-font-sans tw-bg-1 tw-text-1 tw-leading-sm;
+  }
+  body {
+    @apply tw-overscroll-none;
+  }
+  small {
+    @apply tw-text-sm;
+  }
+  a {
+    @apply tw-underline hover:tw-underline-offset-1 tw-duration-fast tw-text-accent-1 hover:tw-text-accent-1-vivid;
+  }
+  ::selection {
+    @apply tw-text-accent-1 tw-bg-4;
+  }
+
+  /* themes */
+  :root {
+    /* COMMON PALETTE */
+    // base
+    --c-black: 0, 0, 0;
+    --c-white: 255, 255, 255;
+
+    /* DEFAULTS */
+    /* accents */
+    // primary
+    --c-accent-1: var(--c-color-2);
+    --c-accent-1-vivid: var(--c-color-1);
+    --c-accent-1-muted: var(--c-color-3);
+    // secondary
+    --c-accent-2: var(--c-accent-1);
+    --c-accent-2-vivid: var(--c-accent-1-vivid);
+    --c-accent-2-muted: var(--c-accent-1-muted);
+    // tertiary
+    --c-accent-3: var(--c-accent-2);
+    --c-accent-3-vivid: var(--c-accent-2-vivid);
+    --c-accent-3-muted: var(--c-accent-2-muted);
+  
+    // Default: be preferred color scheme
+    @include themes.light-mode;
+    @media (prefers-color-scheme: dark) {
+      @include themes.dark-mode;
+    }
+  }
+
+  .light-mode {
+    @include themes.light-mode;
+  }
+  .dark-mode {
+    @include themes.dark-mode;
+  }
+}
