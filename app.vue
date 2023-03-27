@@ -1,5 +1,39 @@
 <template>
-  <div>
-    <NuxtWelcome />
-  </div>
+  <nuxt-loading-indicator color="rgb(var(--c-accent-1))" />
+  <app-layout>
+    <nuxt-page v-if="isOnline" />
+    <message-layout v-else>
+      <p class="tw-text-2">
+        {{ $t('errors.noConnection') }}
+      </p>
+    </message-layout>
+  </app-layout>
 </template>
+
+<script setup lang="ts">
+const { isOnline } = useNetwork()
+const { t } = useI18n()
+
+// Set up meta tags
+const baseUrl = getAbsoluteBaseUrl()
+const route = useRoute()
+
+const href = computed(() => `${baseUrl}${route.path}`)
+
+useSeoMeta({
+  title: 'var(--themage)',
+  description: t('pages.index.description'),
+
+  ogTitle: t('pages.index.title'),
+  ogDescription: t('pages.index.description'),
+  ogType: 'website',
+  ogSiteName: 'themage',
+  ogImage: `${baseUrl}/img/cover.jpg`,
+  ogUrl: href,
+
+  twitterTitle: t('pages.index.title'),
+  twitterDescription: t('pages.index.description'),
+  twitterCard: 'summary_large_image',
+  twitterSite: `@${APP_TWITTER_HANDLE}`,
+})
+</script>
