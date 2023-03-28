@@ -1,0 +1,6 @@
+export * from './getVividColors'
+export * from './parseOptions'
+export * from './getBaseColor'
+export * from './projection'
+export * from './scale'
+export * from './adjust'

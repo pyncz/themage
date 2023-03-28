@@ -68,16 +68,16 @@ module.exports = {
       },
     },
     colors: {
-      black: co('--c-black'),
-      white: co('--c-white'),
+      black: co('--black'),
+      white: co('--white'),
       state: {
-        error: co('--c-state-error'),
-        warning: co('--c-state-warning'),
+        error: co('--state-error'),
+        warning: co('--state-warning'),
       },
       accent: fill(3, i => ({
-        DEFAULT: co(`--c-accent-${i}`),
-        vivid: co(`--c-accent-${i}-vivid`),
-        muted: co(`--c-accent-${i}-muted`),
+        DEFAULT: co(`--accent-${i}`),
+        vivid: co(`--accent-${i}-vivid`),
+        muted: co(`--accent-${i}-muted`),
       })),
     },
     fontFamily: {
@@ -95,21 +95,23 @@ module.exports = {
     // skins
     textColor: theme => ({
       ...theme('colors'),
-      ...fill(4, i => co(`--c-color-${i}`)),
+      ...fill(4, i => co(`--color-${i}`)),
     }),
     backgroundColor: theme => ({
       ...theme('colors'),
-      ...fill(4, i => co(`--c-bg-${i}`)),
+      ...fill(4, i => co(`--bg-${i}`)),
     }),
     borderColor: theme => ({
       ...theme('colors'),
+      text: fill(4, i => co(`--border-${i}`)),
       transparent: 'transparent',
     }),
     borderRadius: {
       0: '0',
-      sm: '0.125rem',
+      sm: '0.25rem',
       DEFAULT: '0.5rem',
-      lg: '1rem',
+      lg: '0.75rem',
+      xl: '1rem',
       full: '9999px',
     },
     scale: {
@@ -137,7 +139,7 @@ module.exports = {
       1: '1',
     },
     boxShadow: {
-      card: '0 0 1rem -0.5rem rgb(var(--c-color-1))',
+      card: '0 0 1rem -0.5rem rgb(var(--color-1))',
     },
 
     extend: {
@@ -145,14 +147,18 @@ module.exports = {
         '2xs': '320px',
         'xs': '400px',
       },
+      height: {
+        image: '12rem',
+      },
     },
   },
   plugins: [
     plugin(addHeaders),
     plugin(addLayouts),
     plugin(addUtils),
+    require('@pyncz/tailwind-mask-image'),
 
-    ({ theme, addUtilities }) => {
+    ({ theme, addUtilities, addComponents }) => {
       addUtilities({
         '.app-container': {
           'display': 'flex',
@@ -166,6 +172,45 @@ module.exports = {
           '@screen md': {
             paddingRight: theme('padding[8]'),
             paddingLeft: theme('padding[8]'),
+          },
+        },
+      })
+
+      // visually hide
+      addUtilities({
+        '.hide': {
+          zIndex: '-1',
+          opacity: '0',
+          position: 'fixed',
+          top: '-20rem',
+          left: '-20rem',
+        },
+      })
+
+      addComponents({
+        '.button': {
+          'padding': '0.25em 0.5em',
+          'minWidth': '4em',
+          'fontSize': '0.875em',
+          'height': '2em',
+          'display': 'inline-flex',
+          'justifyContent': 'center',
+          'alignItems': 'center',
+          'borderRadius': theme('borderRadius.sm'),
+          'color': theme('textColor.1'),
+          'backgroundColor': theme('backgroundColor.accent.1.DEFAULT'),
+          'border': `1px solid ${theme('backgroundColor.accent.1.DEFAULT')}`,
+          'transitionDuration': theme('transitionDuration.fast'),
+          '&:hover': {
+            transitionDuration: theme('transitionDuration.normal'),
+            backgroundColor: theme('backgroundColor.accent.1.vivid'),
+          },
+          '&:active': {
+            transform: theme('scale.click'),
+          },
+          '&:disabled': {
+            backgroundColor: theme('backgroundColor.accent.1.muted'),
+            color: theme('textColor.2'),
           },
         },
       })

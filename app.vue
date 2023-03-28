@@ -1,9 +1,9 @@
 <template>
-  <nuxt-loading-indicator color="rgb(var(--c-accent-1))" />
+  <nuxt-loading-indicator color="rgb(var(--accent-1))" />
 
   <nuxt-page v-if="isOnline" />
   <message-layout v-else>
-    <p class="tw-text-2">
+    <p class="tw-text-3">
       {{ $t('errors.noConnection') }}
     </p>
   </message-layout>

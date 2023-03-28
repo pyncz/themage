@@ -1,13 +1,19 @@
 @mixin light-mode {
   /* text */
-  --c-color-1: 5, 5, 6;
-  --c-color-2: 59, 67, 74;
-  --c-color-3: 100, 112, 143;
-  --c-color-4: 133, 144, 153;
+  --color-1: var(--base-9);
+  --color-2: var(--base-8);
+  --color-3: var(--base-7);
+  --color-4: var(--base-6);
   
   /* bg */
-  --c-bg-1: 249, 249, 255;
-  --c-bg-2: 245, 245, 252;
-  --c-bg-3: 240, 240, 248;
-  --c-bg-4: 234, 234, 243;
+  --bg-1: var(--base-1);
+  --bg-2: var(--base-2);
+  --bg-3: var(--base-3);
+  --bg-4: var(--base-4);
+
+  /* border */
+  --border-1: var(--base-3);
+  --border-2: var(--base-4);
+  --border-3: var(--base-5);
+  --border-4: var(--base-6);
 }

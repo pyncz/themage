@@ -27,23 +27,33 @@
   :root {
     /* COMMON PALETTE */
     // base
-    --c-black: 0, 0, 0;
-    --c-white: 255, 255, 255;
+    --black: 0, 0, 0;
+    --white: 255, 255, 255;
+
+    --base-1: 255, 255, 255;
+    --base-2: 214, 214, 214;
+    --base-3: 157, 157, 158;
+    --base-4: 105, 105, 108;
+    --base-5: 62, 62, 66;
+    --base-6: 32, 32, 37;
+    --base-7: 24, 24, 31;
+    --base-8: 16, 16, 25;
+    --base-9: 8, 8, 19;
 
     /* DEFAULTS */
     /* accents */
     // primary
-    --c-accent-1: var(--c-color-2);
-    --c-accent-1-vivid: var(--c-color-1);
-    --c-accent-1-muted: var(--c-color-3);
+    --accent-1: var(--color-2);
+    --accent-1-vivid: var(--color-1);
+    --accent-1-muted: var(--color-3);
     // secondary
-    --c-accent-2: var(--c-accent-1);
-    --c-accent-2-vivid: var(--c-accent-1-vivid);
-    --c-accent-2-muted: var(--c-accent-1-muted);
+    --accent-2: var(--accent-1);
+    --accent-2-vivid: var(--accent-1-vivid);
+    --accent-2-muted: var(--accent-1-muted);
     // tertiary
-    --c-accent-3: var(--c-accent-2);
-    --c-accent-3-vivid: var(--c-accent-2-vivid);
-    --c-accent-3-muted: var(--c-accent-2-muted);
+    --accent-3: var(--accent-2);
+    --accent-3-vivid: var(--accent-2-vivid);
+    --accent-3-muted: var(--accent-2-muted);
   
     // Default: be preferred color scheme
     @include themes.light-mode;
@@ -58,4 +68,17 @@
   .dark-mode {
     @include themes.dark-mode;
   }
+}
+
+/* Vue Animations */
+
+// Fade
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity theme('transitionDuration.normal') ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }

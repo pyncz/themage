@@ -1,14 +1,19 @@
+clear: Clear
 errors:
   default: Oops
   noConnection: No connection
   notFound: Not found
   unexpected: We didn't expect it either
 goHome: Go to home page
+imageDefaultAlt: Uploaded image
 pages:
   index:
     description: Generate UI theme by image
     title: '--themage'
+processing: Processing...
 theme:
   dark: Dark
   light: Light
   system: System
+uploadImage: Drop or select an image
+uploadNewImage: Change

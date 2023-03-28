@@ -6,6 +6,7 @@ export default defineAppConfig({
       moon: 'ion:moon-outline',
       open: 'ion:open-outline',
       github: 'ion:logo-github',
+      image: 'ion:image-outline',
       twitter: 'ion:logo-twitter',
     },
   },
