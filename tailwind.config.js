@@ -1,31 +1,62 @@
-const plugin = require('tailwindcss/plugin')
-const addHeaders = require('./tailwind/headers')
-const addLayouts = require('./tailwind/layouts')
-const addUtils = require('./tailwind/utils')
+import plugin from 'tailwindcss/plugin'
+import maskImagePlugin from '@pyncz/tailwind-mask-image'
+import addHeaders from './tailwind/headers'
+import addLayouts from './tailwind/layouts'
+import addUtils from './tailwind/utils'
 
-function c(color, opacityValue) {
+const c = (color, opacityValue) => {
   return opacityValue === undefined
     ? `rgb(var(${color}))`
     : `rgba(var(${color}), ${opacityValue})`
 }
 
 // return color with concomitant opacity
-function co(color) {
+const co = (color) => {
   return ({ opacityValue }) => c(color, opacityValue)
 }
 
 // fill values for enumerable props
-function fill(
-  size,
-  valueFormer,
-  start = 1,
-  keyFormer = i => i,
-) {
+const fill = (
+  volume,
+  valueGetter,
+  keyGetter = i => `${i + 1}`,
+) => {
   const config = {}
-  for (let i = start; i <= start + size - 1; i++) {
-    config[keyFormer(i)] = valueFormer(i)
+  for (let i = 0; i < volume; i++) {
+    config[keyGetter(i, volume)] = valueGetter(i, volume)
   }
   return config
+}
+
+const colorRange = (scope, volume = 9) => {
+  const getSuffix = i => `${i + 1}00`
+  return fill(
+    volume,
+    i => co(`--${scope}-${getSuffix(i)}`),
+    getSuffix,
+  )
+}
+
+const accentColorRange = (scope) => {
+  return {
+    ...colorRange(scope),
+    DEFAULT: co(`--${scope}`),
+    vivid: co(`--${scope}-vivid`),
+    muted: co(`--${scope}-muted`),
+  }
+}
+
+const colorDimmed = (scope) => {
+  const volume = 4
+  const getSuffix = i => `dim-${i + 1}`
+  return {
+    base: co(`--${scope}-base`),
+    ...fill(
+      volume - 1,
+      i => co(`--${scope}-${getSuffix(i)}`),
+      getSuffix,
+    ),
+  }
 }
 
 const sansSerif = [
@@ -36,7 +67,7 @@ const sansSerif = [
 ]
 
 // Read more about tailwindcss configuration: https://tailwindcss.com/docs/configuration
-module.exports = {
+export default {
   mode: 'jit',
   prefix: 'tw-',
   safelist: [
@@ -58,6 +89,10 @@ module.exports = {
       'xl': '2rem',
       '2xl': '3rem',
       '3xl': '4rem',
+
+      '3/4': '0.75em',
+      '7/8': '0.875em',
+      'em': '1em',
     },
     container: {
       center: true,
@@ -70,15 +105,12 @@ module.exports = {
     colors: {
       black: co('--black'),
       white: co('--white'),
-      state: {
-        error: co('--state-error'),
-        warning: co('--state-warning'),
+      base: colorRange('base', 12),
+      accent: {
+        primary: accentColorRange('accent-primary'),
+        secondary: accentColorRange('accent-secondary'),
+        tertiary: accentColorRange('accent-tertiary'),
       },
-      accent: fill(3, i => ({
-        DEFAULT: co(`--accent-${i}`),
-        vivid: co(`--accent-${i}-vivid`),
-        muted: co(`--accent-${i}-muted`),
-      })),
     },
     fontFamily: {
       header: ['Manrope', ...sansSerif],
@@ -95,15 +127,15 @@ module.exports = {
     // skins
     textColor: theme => ({
       ...theme('colors'),
-      ...fill(4, i => co(`--color-${i}`)),
+      ...colorDimmed('color'),
     }),
     backgroundColor: theme => ({
       ...theme('colors'),
-      ...fill(4, i => co(`--bg-${i}`)),
+      ...colorDimmed('bg'),
     }),
     borderColor: theme => ({
       ...theme('colors'),
-      text: fill(4, i => co(`--border-${i}`)),
+      ...colorDimmed('border'),
       transparent: 'transparent',
     }),
     borderRadius: {
@@ -150,13 +182,17 @@ module.exports = {
       height: {
         image: '12rem',
       },
+      spacing: {
+        '1/2': '0.5em',
+        'em': '1em',
+      },
     },
   },
   plugins: [
     plugin(addHeaders),
     plugin(addLayouts),
     plugin(addUtils),
-    require('@pyncz/tailwind-mask-image'),
+    maskImagePlugin,
 
     ({ theme, addUtilities, addComponents }) => {
       addUtilities({
@@ -187,6 +223,7 @@ module.exports = {
         },
       })
 
+      // buttons
       addComponents({
         '.button': {
           'padding': '0.25em 0.5em',
@@ -197,20 +234,53 @@ module.exports = {
           'justifyContent': 'center',
           'alignItems': 'center',
           'borderRadius': theme('borderRadius.sm'),
-          'color': theme('textColor.1'),
-          'backgroundColor': theme('backgroundColor.accent.1.DEFAULT'),
-          'border': `1px solid ${theme('backgroundColor.accent.1.DEFAULT')}`,
           'transitionDuration': theme('transitionDuration.fast'),
+          'color': theme('textColor.base'),
+          'backgroundColor': theme('colors.accent.primary.DEFAULT'),
+          'border': `1px solid ${theme('colors.accent.primary.vivid')}`,
           '&:hover': {
             transitionDuration: theme('transitionDuration.normal'),
-            backgroundColor: theme('backgroundColor.accent.1.vivid'),
+            backgroundColor: theme('colors.accent.primary.vivid'),
           },
           '&:active': {
             transform: theme('scale.click'),
           },
           '&:disabled': {
-            backgroundColor: theme('backgroundColor.accent.1.muted'),
-            color: theme('textColor.2'),
+            backgroundColor: theme('colors.accent.primary.muted'),
+            opacity: theme('opacity.muted'),
+          },
+        },
+        '.button-muted': {
+          'color': theme('textColor.dim-1'),
+          'backgroundColor': theme('backgroundColor.dim-1'),
+          'border': `1px solid ${theme('backgroundColor.dim-2')}`,
+          '&:hover': {
+            backgroundColor: theme('backgroundColor.dim-2'),
+          },
+          '&:disabled': {
+            color: theme('textColor.dim-2'),
+            backgroundColor: theme('backgroundColor.dim-3'),
+            opacity: theme('opacity.muted'),
+          },
+        },
+      })
+
+      // links
+      addComponents({
+        '.link': {
+          'textDecorationLine': 'underline',
+          'textUnderlineOffset': '1px',
+          'transitionDuration': theme('transitionDuration.fast'),
+          'color': theme('colors.accent.secondary.DEFAULT'),
+          '&:hover': {
+            transitionDuration: theme('transitionDuration.normal'),
+            color: theme('colors.accent.secondary.vivid'),
+          },
+        },
+        '.link-muted': {
+          'color': theme('textColor.dim-2'),
+          '&:hover': {
+            color: theme('textColor.dim-1'),
           },
         },
       })

@@ -6,6 +6,7 @@ errors:
   unexpected: We didn't expect it either
 goHome: Go to home page
 imageDefaultAlt: Uploaded image
+madeBy: ' Made by'
 pages:
   index:
     description: Generate UI theme by image
@@ -13,6 +14,7 @@ pages:
 processing: Processing...
 theme:
   dark: Dark
+  image: From image
   light: Light
   system: System
 uploadImage: Drop or select an image

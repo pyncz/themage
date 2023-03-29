@@ -1,30 +1,32 @@
 import type { MaybeRef } from '@vueuse/core'
 import type { Theme } from '../services/getTheme'
-import type { RGB } from '../models'
+import type { ThemeApplyOptions, ThemeMap } from '../models'
+import { useThemeStore } from '../stores'
 
-const getColorsMap = (scope: string, colors?: RGB[]) => {
-  return colors?.reduce((themeMap, color, index) => {
-    themeMap[`--${scope}-${index + 1}`] = color.join(', ')
-    return themeMap
-  }, {} as Record<string, string>)
-}
-
-export const useThemeApply = (theme: MaybeRef<Theme | null>) => {
-  const style = computed(() => {
+export const useThemeApply = (
+  theme: MaybeRef<Theme | null>,
+  options?: MaybeRef<ThemeApplyOptions>,
+) => {
+  const styles = computed(() => {
     const { base, accent } = unref(theme) ?? {}
+    const {
+      semanticNames = [],
+    } = unref(options) ?? {}
+
     return {
       ...getColorsMap('base', base),
-      ...accent?.reduce((accents, accent, index) => {
-        const updatedAccents = {
-          ...accents,
-          ...getColorsMap(`accent-${index + 1}`, accent),
+      ...accent?.reduce((accentsMap, color, index) => {
+        const scope = getSemanticName(index, accent.length, semanticNames)
+        return {
+          ...accentsMap,
+          ...getColorsMap(`accent-${scope}`, color),
         }
-        return updatedAccents
-      }, {}),
+      }, {} as ThemeMap),
     }
   })
 
-  useHead({
-    style: [style.value],
-  })
+  const { setStyles } = useThemeStore()
+
+  // when new styles are set, update root styles
+  whenever(styles, setStyles)
 }

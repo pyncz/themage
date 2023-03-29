@@ -33,6 +33,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n-edge',
     '@vue-macros/nuxt',
     '@vueuse/nuxt',
+    '@pinia/nuxt',
 
     // perfomance
     '@nuxtjs/critters',

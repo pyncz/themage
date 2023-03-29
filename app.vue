@@ -1,12 +1,14 @@
 <template>
-  <nuxt-loading-indicator color="rgb(var(--accent-1))" />
+  <theme-wrapper>
+    <nuxt-loading-indicator color="rgb(var(--accent-primary-500))" />
 
-  <nuxt-page v-if="isOnline" />
-  <message-layout v-else>
-    <p class="tw-text-3">
-      {{ $t('errors.noConnection') }}
-    </p>
-  </message-layout>
+    <nuxt-page v-if="isOnline" />
+    <message-layout v-else>
+      <p class="tw-text-dim-2">
+        {{ $t('errors.noConnection') }}
+      </p>
+    </message-layout>
+  </theme-wrapper>
 </template>
 
 <script setup lang="ts">
@@ -17,8 +19,6 @@ const { t } = useI18n()
 const baseUrl = getAbsoluteBaseUrl()
 const route = useRoute()
 
-const href = computed(() => `${baseUrl}${route.path}`)
-
 useSeoMeta({
   title: 'var(--themage)',
   description: t('pages.index.description'),
@@ -27,8 +27,8 @@ useSeoMeta({
   ogDescription: t('pages.index.description'),
   ogType: 'website',
   ogSiteName: 'themage',
-  ogImage: `${baseUrl}/img/cover.jpg`,
-  ogUrl: href,
+  ogImage: () => `${baseUrl}/img/cover.jpg`,
+  ogUrl: () => `${baseUrl}${route.path}`,
 
   twitterTitle: t('pages.index.title'),
   twitterDescription: t('pages.index.description'),
