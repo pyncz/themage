@@ -106,8 +106,8 @@
       <app-footer class="tw-hidden sm:tw-inline-flex" />
     </div>
 
-    <div class="tw-sticky tw-top-0 tw-app-container tw-h-[40rem] sm:tw-h-screen tw-py-6 sm:tw-py-8 sm:tw-max-w-xl tw-w-full tw-mr-auto">
-      <div class="tw-overflow-y-auto tw-bg-card tw-rounded-xl tw-py-8 tw-app-container tw-flex-1 sm:tw--m-2">
+    <div class="tw-sticky tw-top-0 xs:tw-app-container sm:tw-h-screen tw-py-6 sm:tw-py-8 sm:tw-max-w-xl tw-w-full tw-mr-auto">
+      <div class="tw-overflow-y-auto tw-bg-card xs:tw-rounded-xl tw-py-8 tw-app-container tw-flex-1 sm:tw--m-2">
         <PalettePreview :colors="theme?.base" label="base" />
         <PalettePreview
           :colors="theme?.accent"
