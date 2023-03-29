@@ -257,9 +257,10 @@ export default {
         '.button-muted': {
           'color': theme('textColor.dim-1'),
           'backgroundColor': theme('backgroundColor.dim-1'),
-          'border': `1px solid ${theme('backgroundColor.dim-2')}`,
+          'border': `1px solid ${theme('borderColor.dim-2')}`,
           '&:hover': {
-            backgroundColor: theme('backgroundColor.dim-2'),
+            backgroundColor: theme('backgroundColor.dim-1'),
+            borderColor: theme('borderColor.dim-1'),
           },
           '&:disabled': {
             color: theme('textColor.dim-2'),
