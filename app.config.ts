@@ -8,6 +8,8 @@ export default defineAppConfig({
       github: 'ion:logo-github',
       image: 'ion:image-outline',
       twitter: 'ion:logo-twitter',
+      copy: 'ion:copy-outline',
+      check: 'ion:checkmark-outline',
     },
   },
 })
