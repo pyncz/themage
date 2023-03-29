@@ -1,4 +1,4 @@
-module.exports = ({ matchUtilities, theme }) => {
+export default ({ matchUtilities, theme }) => {
   const size = value => ({
     height: value,
     minHeight: value,

@@ -1,4 +1,4 @@
-module.exports = ({ addUtilities }) => {
+export default ({ addUtilities }) => {
   addUtilities({
     '.flex-center': {
       display: 'flex',

@@ -1,4 +1,4 @@
-module.exports = ({ addBase, theme, addUtilities }) => {
+export default ({ addBase, theme, addUtilities }) => {
   const commonHeaderStyles = {
     fontFamily: theme('fontFamily.header'),
   }
