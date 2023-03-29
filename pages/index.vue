@@ -42,14 +42,67 @@
         <switch-color-mode />
 
         <lib-disclosure :message="$t('tweakTheme')">
-          tweak theme
+          <div class="tw-space-y-4">
+            <theme-tweak
+              v-slot="{ id }"
+              :label="$t('tweaks.dim.label')"
+              :description="$t('tweaks.dim.description')"
+            >
+              <lib-input
+                :id="id"
+                v-model="tweaks.dim"
+                type="number"
+                :min="0"
+                :max="1"
+              />
+            </theme-tweak>
+            <theme-tweak
+              v-slot="{ id }"
+              :label="$t('tweaks.contrast.label')"
+              :description="$t('tweaks.contrast.description')"
+            >
+              <lib-input
+                :id="id"
+                v-model="tweaks.contrast"
+                type="number"
+                :min="0"
+                :max="1"
+              />
+            </theme-tweak>
+            <theme-tweak
+              v-slot="{ id }"
+              :label="$t('tweaks.shift.label')"
+              :description="$t('tweaks.shift.description')"
+            >
+              <lib-input
+                :id="id"
+                v-model="tweaks.shift"
+                type="number"
+                :min="-1"
+                :max="1"
+              />
+            </theme-tweak>
+            <theme-tweak
+              v-slot="{ id }"
+              :label="$t('tweaks.balance.label')"
+              :description="$t('tweaks.balance.description')"
+            >
+              <lib-input
+                :id="id"
+                v-model="tweaks.balance"
+                type="number"
+                :min="-1"
+                :max="1"
+              />
+            </theme-tweak>
+          </div>
         </lib-disclosure>
       </section>
 
       <app-footer class="tw-hidden sm:tw-inline-flex" />
     </div>
 
-    <div class="tw-app-container tw-h-[40rem] sm:tw-h-screen tw-py-6 sm:tw-py-8 sm:tw-max-w-xl tw-w-full tw-mr-auto">
+    <div class="tw-sticky tw-top-0 tw-app-container tw-h-[40rem] sm:tw-h-screen tw-py-6 sm:tw-py-8 sm:tw-max-w-xl tw-w-full tw-mr-auto">
       <div class="tw-overflow-y-auto tw-bg-card tw-rounded-xl tw-py-8 tw-app-container tw-flex-1 sm:tw--m-2">
         <PalettePreview :colors="theme?.base" label="base" />
         <PalettePreview
@@ -75,15 +128,22 @@ const { isProcessing, name, imageDataString } = useImageFile(imageFile)
 const image = ref<HTMLImageElement | null>(null)
 
 const { palette } = usePaletteByImageRef(image)
-const { theme, metadata } = useThemeByPalette(palette, {
-  // dim: 0,
-  // contrast: 1,
-  // shift: 0,
-  // balance: 0,
+
+const tweaks = reactive({
+  dim: 0,
+  contrast: 1,
+  shift: 0,
+  balance: 0,
+})
+
+const useThemeOptions = computed(() => ({
+  ...tweaks,
   volume: 12,
   accentsVolume: 9,
   maxAccents: 3,
-})
+}))
+
+const { theme, metadata } = useThemeByPalette(palette, useThemeOptions)
 
 watch(metadata, () => {
   const root = document.querySelector('html')!

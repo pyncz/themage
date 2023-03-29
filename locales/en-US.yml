@@ -17,5 +17,21 @@ theme:
   image: From image
   light: Light
   system: System
+tweakTheme: Tweak theme
+tweaks:
+  balance:
+    description: Shift of the the light / dark balance (-1..1)
+    label: Balance
+  contrast:
+    description: Сolor range width (0..1)
+    label: Contrast
+  dim:
+    description: Desaturate the colors (0..1)
+    label: Dimness
+  shift:
+    description: >-
+      Shift of the color scale into light / dark area (-1..1). Applied only if
+      any non-default `contrast` value is provided
+    label: Shift
 uploadImage: Drop or select an image
 uploadNewImage: Change

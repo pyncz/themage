@@ -16,7 +16,7 @@ export const scale = (
   } = options ?? {}
 
   const colorChroma = chroma(base).set('hsl.l', valueFrom)
-  const middle = chroma(base).set('hsl.l', 0.5)
+  const middle = chroma(base).set('hsl.l', 0.5) // .set('hsv.v', 0.5)
   const opposite = chroma(base).set('hsl.l', valueTo)
 
   const padding = (1 - contrast) * MAX_CONTRAST_CUT
