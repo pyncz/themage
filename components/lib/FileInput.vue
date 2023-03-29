@@ -1,9 +1,10 @@
 <template>
   <label
-    class="tw-group/input tw-flex tw-cursor-pointer tw-relative tw-rounded-lg tw-overflow-hidden tw-min-h-[10rem] tw-duration-normal tw-border tw-border-dashed tw-border-text-4 hover:tw-border-text-3 data-[over=true]:tw-border-accent-1"
+    class="tw-group/input tw-flex tw-cursor-pointer tw-relative tw-rounded-lg tw-overflow-hidden tw-min-h-[10rem] tw-duration-normal tw-border tw-border-dashed tw-border-dim-2 hover:tw-border-dim-1 data-[over=true]:tw-border-accent-primary"
     :data-over="isOverDropZone"
   >
     <input
+      ref="input"
       type="file"
       class="tw-hide"
       v-bind="$attrs"
@@ -21,7 +22,8 @@
 </template>
 
 <script setup lang="ts">
-const dropZoneRef = ref<HTMLElement>()
+const dropZoneRef = ref<HTMLDivElement>()
+const inputRef = ref<HTMLInputElement>()
 
 const { modelValue: files } = defineModel<{
   modelValue: File[]
@@ -40,6 +42,9 @@ const onChange = (e: Event) => {
 
 const clear = () => {
   files.value = []
+  if (inputRef.value) {
+    inputRef.value.value = ''
+  }
 }
 
 const onDrop = (droppedFiles: File[] | null) => {
