@@ -6,7 +6,13 @@ export const parseOptions = (options: GetThemeOptions = {}): NonNullable<GetThem
   options.volume ??= DEFAULT_VOLUME
   if (options.volume < 1) {
     options.volume = 1
-    console.warn('Volume is less than 1! One color for each scope (base / accent) will be used by default')
+    console.warn('Volume is less than 1! 1 color will be used by default')
+  }
+
+  options.accentsVolume ??= options.volume
+  if (options.accentsVolume < 1) {
+    options.accentsVolume = 1
+    console.warn('Accents\' volume is less than 1! 1 color will be used by default')
   }
 
   options.maxAccents ??= 3

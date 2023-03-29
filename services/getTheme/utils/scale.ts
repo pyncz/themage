@@ -15,12 +15,13 @@ export const scale = (
     valueTo = BASE_LIGHTNESS_TO,
   } = options ?? {}
 
-  const colorChroma = chroma(base).set('hsv.v', valueFrom)
-  const opposite = chroma(base).set('hsv.v', valueTo)
+  const colorChroma = chroma(base).set('hsl.l', valueFrom)
+  const middle = chroma(base).set('hsl.l', 0.5)
+  const opposite = chroma(base).set('hsl.l', valueTo)
 
   const padding = (1 - contrast) * MAX_CONTRAST_CUT
 
-  return chroma.scale([colorChroma, opposite])
+  return chroma.scale([colorChroma, middle, opposite])
     .gamma(1 - MAX_GAMMA_SHIFT * balance)
     .padding([
       padding + shift * padding,

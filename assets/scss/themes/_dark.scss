@@ -1,19 +1,30 @@
 @mixin dark-mode {
   /* text */
-  --color-1: var(--base-1);
-  --color-2: var(--base-2);
-  --color-3: var(--base-3);
-  --color-4: var(--base-4);
+  --color-base: var(--base-200);
+  --color-dim-1: var(--base-500);
+  --color-dim-2: var(--base-600);
+  --color-dim-3: var(--base-800);
   
   /* bg */
-  --bg-1: var(--base-9);
-  --bg-2: var(--base-8);
-  --bg-3: var(--base-7);
-  --bg-4: var(--base-6);
+  --bg-base: var(--base-1200);
+  --bg-dim-1: var(--base-1100);
+  --bg-dim-2: var(--base-1000);
+  --bg-dim-3: var(--base-900);
 
   /* border */
-  --border-1: var(--base-3);
-  --border-2: var(--base-4);
-  --border-3: var(--base-5);
-  --border-4: var(--base-6);
+  --border-base: var(--base-800);
+  --border-dim-1: var(--base-900);
+  --border-dim-2: var(--base-1000);
+  --border-dim-3: var(--base-1100);
+
+  /* accents */
+  --accent-primary: var(--accent-primary-400);
+  --accent-primary-vivid: var(--accent-primary-300);
+  --accent-primary-muted: var(--accent-primary-500);
+  --accent-secondary: var(--accent-secondary-400);
+  --accent-secondary-vivid: var(--accent-secondary-300);
+  --accent-secondary-muted: var(--accent-secondary-500);
+  --accent-tertiary: var(--accent-tertiary-400);
+  --accent-tertiary-vivid: var(--accent-tertiary-300);
+  --accent-tertiary-muted: var(--accent-tertiary-500);
 }

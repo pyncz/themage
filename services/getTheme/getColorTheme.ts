@@ -1,5 +1,5 @@
 import chroma from 'chroma-js'
-import { ACCENT_VALUE_FROM, DEFAULT_BASE_COLOR, LIGHT_MODE_LIGHTNESS_FLOOR } from './consts'
+import { ACCENT_VALUE_FROM, ACCENT_VALUE_TO, DEFAULT_BASE_COLOR, LIGHT_MODE_LIGHTNESS_FLOOR } from './consts'
 import type { GetThemeOptions, GetThemeReturn, RGB } from './models'
 import { adjust, getBaseColor, getVividColors, parseOptions, scale } from './utils'
 
@@ -8,6 +8,7 @@ export const getColorTheme = (palette: RGB[], options?: GetThemeOptions): GetThe
   let { colorMode } = parsedOptions ?? {}
   const {
     volume,
+    accentsVolume,
     maxAccents,
   } = parsedOptions ?? {}
 
@@ -15,7 +16,7 @@ export const getColorTheme = (palette: RGB[], options?: GetThemeOptions): GetThe
     console.warn('Palette size is 0! Default grayscale theme will be used')
   }
 
-  const vividPalette = getVividColors(palette).map(c => adjust(c, options))
+  const vividPalette = getVividColors(palette)
   const mainColor = palette[0] ?? DEFAULT_BASE_COLOR
 
   if (!colorMode) {
@@ -28,19 +29,27 @@ export const getColorTheme = (palette: RGB[], options?: GetThemeOptions): GetThe
   /**
    * Add UI colors
    */
-  const baseColor = adjust(getBaseColor(mainColor), options)
+  const baseColor = getBaseColor(mainColor)
 
   // Take accent colors
   const accentColors = vividPalette.slice(0, maxAccents)
 
   return {
     theme: {
-      base: scale(baseColor, volume, options),
+      base: scale(
+        adjust(baseColor, options),
+        volume,
+        options,
+      ),
       accent: accentColors.map(color => scale(
         adjust(color, options),
-        volume,
-        // don't go full dark with accent colors
-        { ...options, valueFrom: ACCENT_VALUE_FROM },
+        accentsVolume,
+        {
+          ...options,
+          // don't go full white / full black with accent colors
+          valueFrom: ACCENT_VALUE_FROM,
+          valueTo: ACCENT_VALUE_TO,
+        },
       )),
     },
     metadata: {

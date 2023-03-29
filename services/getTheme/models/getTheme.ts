@@ -4,6 +4,7 @@ import type { Theme, ThemeMetadata } from './theme'
 export interface AdjustOptions {
   /**
    * Desaturate the colors (0..1)
+   * @default 0
    */
   dim?: number
 }
@@ -16,14 +17,14 @@ export interface ScaleOptions {
   contrast?: number
 
   /**
-   * Shifts the color scale into dark / light area (-1..1)
+   * Shifts the color scale into light / dark area (-1..1)
    * Applied only if any non-default `contrast` is provided
    * @default 0
    */
   shift?: number
 
   /**
-   * Shifts the dark / light balance (-1..1)
+   * Shifts the light / dark balance (-1..1)
    * @default 0
    */
   balance?: number
@@ -46,6 +47,12 @@ export interface GetThemeOptions extends AdjustOptions, ScaleOptions {
    * @default 12
    */
   volume?: number
+
+  /**
+   * Number of varants in the accent colors' scales  (1..)
+   * @default {@link volume}
+   */
+  accentsVolume?: number
 
   /**
    * Max number of accent colors (0..)

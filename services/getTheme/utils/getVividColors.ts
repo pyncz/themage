@@ -11,10 +11,10 @@ export const getVividColors = (palette: RGB[]): RGB[] => {
       chromaColor = chromaColor.set('hsv.v', 1)
 
       // check if there are similar colors in the palette already
-      if (!vividColors.some((c) => chroma.deltaE(c, chromaColor) < 25)) {
+      if (!vividColors.some(c => chroma.deltaE(c, chromaColor) < 25)) {
         vividColors.push(chromaColor)
       }
     }
     return vividColors
-  }, [] as chroma.Color[]).map((c) => c.rgb())
+  }, [] as chroma.Color[]).map(c => c.rgb())
 }
