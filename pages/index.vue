@@ -52,6 +52,7 @@
                 :id="id"
                 v-model="tweaks.dim"
                 type="number"
+                placeholder="0..1"
                 :min="0"
                 :max="1"
               />
@@ -65,6 +66,7 @@
                 :id="id"
                 v-model="tweaks.contrast"
                 type="number"
+                placeholder="0..1"
                 :min="0"
                 :max="1"
               />
@@ -78,6 +80,7 @@
                 :id="id"
                 v-model="tweaks.shift"
                 type="number"
+                placeholder="-1..1"
                 :min="-1"
                 :max="1"
               />
@@ -91,6 +94,7 @@
                 :id="id"
                 v-model="tweaks.balance"
                 type="number"
+                placeholder="-1..1"
                 :min="-1"
                 :max="1"
               />
