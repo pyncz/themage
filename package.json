@@ -15,6 +15,7 @@
     "lintfix": "nr lint --fix"
   },
   "dependencies": {
+    "@headlessui/tailwindcss": "^0.1.2",
     "@headlessui/vue": "latest",
     "@nuxtjs/critters": "^0.3.3",
     "@nuxtjs/fontaine": "^0.2.4",

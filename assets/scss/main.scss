@@ -16,9 +16,6 @@
   small {
     @apply tw-text-sm;
   }
-  a {
-    @apply tw-link;
-  }
   ::selection {
     @apply tw-text-accent-secondary tw-bg-dim-1;
   }
@@ -82,9 +79,11 @@
       @include themes.dark-mode;
     }
 
+    .image-mode.image-light &,
     .light-mode & {
       @include themes.light-mode;
     }
+    .image-mode.image-dark &,
     .dark-mode & {
       @include themes.dark-mode;
     }

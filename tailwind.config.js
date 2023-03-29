@@ -1,5 +1,6 @@
 import plugin from 'tailwindcss/plugin'
 import maskImagePlugin from '@pyncz/tailwind-mask-image'
+import headlessUiPlugin from '@headlessui/tailwindcss'
 import addHeaders from './tailwind/headers'
 import addLayouts from './tailwind/layouts'
 import addUtils from './tailwind/utils'
@@ -132,6 +133,8 @@ export default {
     backgroundColor: theme => ({
       ...theme('colors'),
       ...colorDimmed('bg'),
+      card: co('--bg-card'),
+      main: co('--bg-main'),
     }),
     borderColor: theme => ({
       ...theme('colors'),
@@ -193,6 +196,7 @@ export default {
     plugin(addLayouts),
     plugin(addUtils),
     maskImagePlugin,
+    headlessUiPlugin,
 
     ({ theme, addUtilities, addComponents }) => {
       addUtilities({
@@ -235,7 +239,7 @@ export default {
           'alignItems': 'center',
           'borderRadius': theme('borderRadius.sm'),
           'transitionDuration': theme('transitionDuration.fast'),
-          'color': theme('textColor.base'),
+          'color': theme('colors.base.100'),
           'backgroundColor': theme('colors.accent.primary.DEFAULT'),
           'border': `1px solid ${theme('colors.accent.primary.vivid')}`,
           '&:hover': {
