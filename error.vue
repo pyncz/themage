@@ -9,7 +9,11 @@
           {{ message }}
         </p>
         <div>
-          <a role="button" @click="clearError({ redirect: '/' })">
+          <a
+            class="tw-link"
+            role="button"
+            @click="clearError({ redirect: '/' })"
+          >
             {{ $t('goHome') }}
           </a>
         </div>

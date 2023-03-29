@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@antfu/eslint-config': ^0.26.3
   '@antfu/ni': ^0.10.2
+  '@headlessui/tailwindcss': ^0.1.2
   '@headlessui/vue': latest
   '@nuxtjs/color-mode': ^3.2.0
   '@nuxtjs/critters': ^0.3.3
@@ -33,6 +34,7 @@ specifiers:
   typescript: ^4.9.5
 
 dependencies:
+  '@headlessui/tailwindcss': 0.1.2_tailwindcss@3.3.0
   '@headlessui/vue': 1.7.12
   '@nuxtjs/critters': 0.3.3
   '@nuxtjs/fontaine': 0.2.4
@@ -681,6 +683,15 @@ packages:
   /@eslint/js/8.36.0:
     resolution: {integrity: sha512-lxJ9R5ygVm8ZWgYdUweoq5ownDlJ4upvoWmO4eLxBYHdMo+vZ/Rx0EN6MbKWDJOSUGrqJy2Gt+Dyv/VKml0fjg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  /@headlessui/tailwindcss/0.1.2_tailwindcss@3.3.0:
+    resolution: {integrity: sha512-AQNESz+f1grCxifrocOE6hDMDFqhqY0g3xrSGOS0ocGkmVkssaBzXaAPAPNSs/nHmr4ZUhfl5THQpYrvaouWlQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      tailwindcss: ^3.0
+    dependencies:
+      tailwindcss: 3.3.0_postcss@8.4.21
+    dev: false
 
   /@headlessui/vue/1.7.12:
     resolution: {integrity: sha512-IV0k1I2I8Bj37HljFF231Y9cpldfiucf+inMCxA/VPoQT6UTxo0N/rb78CrogBxXNfsPxKmz3y/nlv+eRz6zvg==}

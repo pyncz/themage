@@ -1,7 +1,7 @@
 <template>
   <a
     role="button"
-    class="tw-link-muted tw-decoration-dashed tw-text-dim-3 hover:tw-text-dim-2"
+    class="tw-link tw-link-muted tw-decoration-dashed tw-text-dim-3 hover:tw-text-dim-2"
     @click="copy()"
   >
     <span class="tw-text-dim-2"><slot>{{ value }}</slot></span>
