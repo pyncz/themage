@@ -1,5 +1,5 @@
 <template>
-  <div v-if="childColors" class="tw-py-1/2">
+  <div v-if="childColors?.length" class="tw-py-1/2">
     <h6 v-if="label" class="tw-mb-1">
       {{ label }}
     </h6>
