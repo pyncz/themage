@@ -23,19 +23,19 @@ tweaks:
   balance:
     description: >-
       Shift of the middle color (by lightness) into the light or the dark area
-      (-1..1)
+      ({min}..{max})
     label: Balance
   contrast:
     description: >-
-      Color range width (0..1). Set it to low if you want to cut off the
+      Color range width ({min}..{max}). Set it to low if you want to cut off the
       lightest and the darkest tones
     label: Contrast
   dim:
-    description: Desaturate the colors (0..1)
+    description: Desaturate the colors ({min}..{max})
     label: Dimness
   shift:
     description: >-
-      Shift of the color scale to the light or dark area (-1..1). Applied only
+      Shift of the color scale to the light or the dark area ({min}..{max}). Applied only
       if any non-default `contrast` value is provided
     label: Shift
 uploadImage: Drop or select an image

@@ -10,19 +10,37 @@
         {{ description }}
       </p>
     </div>
-    <div>
-      <slot v-bind="{ id }" />
-    </div>
+    <lib-field :errors="errors">
+      <lib-input
+        :id="id"
+        v-bind="$attrs"
+        v-model="modelValue"
+        type="number"
+        :placeholder="placeholder"
+      />
+    </lib-field>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { ErrorObject } from '@vuelidate/core'
 import { v4 as uuid } from 'uuid'
 
-defineProps<{
+const props = defineProps<{
   label: string
+  errors?: ErrorObject[]
   description?: string
+  range?: { min?: number; max?: number }
+}>()
+
+const { modelValue } = defineModel<{
+  modelValue?: number
 }>()
 
 const id = uuid()
+
+const placeholder = computed(() => props.range?.max || props.range?.max
+  ? `${props.range.min ?? ''}..${props.range.max ?? ''}`
+  : undefined,
+)
 </script>
