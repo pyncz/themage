@@ -112,6 +112,9 @@ export default {
         secondary: accentColorRange('accent-secondary'),
         tertiary: accentColorRange('accent-tertiary'),
       },
+      state: {
+        error: co('--state-error'),
+      },
     },
     fontFamily: {
       header: ['Manrope', ...sansSerif],

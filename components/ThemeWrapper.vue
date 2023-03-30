@@ -1,5 +1,5 @@
 <template>
-  <main :style="styles" class="tw-bg-main tw-text-base">
+  <main :style="styles" class="tw-bg-main tw-text-base tw-min-h-screen tw-flex tw-flex-col">
     <slot />
   </main>
 </template>

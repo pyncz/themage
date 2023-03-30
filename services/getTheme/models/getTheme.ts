@@ -30,12 +30,14 @@ export interface ScaleOptions {
   balance?: number
 }
 
+export type ThemeTweaks = AdjustOptions & ScaleOptions
+
 export interface ScaleInternalOptions extends ScaleOptions {
   valueFrom?: number
   valueTo?: number
 }
 
-export interface GetThemeOptions extends AdjustOptions, ScaleOptions {
+export interface GetThemeOptions extends ThemeTweaks {
   /**
    * Forced color mode
    * @default null (determined from the palette's first color)

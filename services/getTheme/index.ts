@@ -7,4 +7,5 @@ export type {
   GetThemeReturn,
   AdjustOptions,
   ScaleOptions,
+  ThemeTweaks,
 } from './models'

@@ -16,6 +16,8 @@ specifiers:
   '@types/uuid': ^9.0.1
   '@voire/type-utils': ^1.2.1
   '@vue-macros/nuxt': ^1.2.7
+  '@vuelidate/core': ^2.0.2
+  '@vuelidate/validators': ^2.0.2
   '@vueuse/core': ^9.13.0
   '@vueuse/nuxt': ^9.13.0
   autoprefixer: ^10.4.14
@@ -41,6 +43,8 @@ dependencies:
   '@nuxtjs/i18n-edge': 8.0.0-beta.9-27948515.3db6367
   '@pinia/nuxt': 0.4.7_typescript@4.9.5
   '@pyncz/tailwind-mask-image': 2.0.0
+  '@vuelidate/core': 2.0.2
+  '@vuelidate/validators': 2.0.2
   '@vueuse/core': 9.13.0
   '@vueuse/nuxt': 9.13.0_nuxt@3.3.2
   buffer: 6.0.3
@@ -2182,6 +2186,30 @@ packages:
 
   /@vue/shared/3.2.47:
     resolution: {integrity: sha512-BHGyyGN3Q97EZx0taMQ+OLNuZcW3d37ZEVmEAyeoA9ERdGvm9Irc/0Fua8SNyOtV1w6BS4q25wbMzJujO9HIfQ==}
+
+  /@vuelidate/core/2.0.2:
+    resolution: {integrity: sha512-aG1OZWv6xVws3ljyKy/pyxq1rdZZ2ryj+FEREcC9d4GP4qOvNHHZUl/NQxa0Bck3Ooc0RfXU8vwCA9piRoWy6w==}
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^2.0.0 || >=3.0.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue-demi: 0.13.11
+    dev: false
+
+  /@vuelidate/validators/2.0.2:
+    resolution: {integrity: sha512-6y6QLoK567XVmaLP3Paf1vkg6K2zO6xax3yTyczy1RnJ4PsLDLLGzP1PFzSpwb16aw4CKduBgI63HvIuctJhQg==}
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^2.0.0 || >=3.0.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue-demi: 0.13.11
+    dev: false
 
   /@vueuse/core/9.13.0:
     resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}

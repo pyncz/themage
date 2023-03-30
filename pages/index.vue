@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-[minmax(0,_2fr)_minmax(0,_3fr)] md:tw-grid-cols-2">
+  <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-[minmax(0,_2fr)_minmax(0,_3fr)] md:tw-grid-cols-2 tw-flex-1">
     <div class="tw-app-container sm:tw-min-h-screen tw-py-8">
       <app-header />
 
@@ -42,64 +42,7 @@
         <switch-color-mode />
 
         <lib-disclosure :message="$t('tweakTheme')">
-          <div class="tw-space-y-4">
-            <theme-tweak
-              v-slot="{ id }"
-              :label="$t('tweaks.dim.label')"
-              :description="$t('tweaks.dim.description')"
-            >
-              <lib-input
-                :id="id"
-                v-model="tweaks.dim"
-                type="number"
-                placeholder="0..1"
-                :min="0"
-                :max="1"
-              />
-            </theme-tweak>
-            <theme-tweak
-              v-slot="{ id }"
-              :label="$t('tweaks.contrast.label')"
-              :description="$t('tweaks.contrast.description')"
-            >
-              <lib-input
-                :id="id"
-                v-model="tweaks.contrast"
-                type="number"
-                placeholder="0..1"
-                :min="0"
-                :max="1"
-              />
-            </theme-tweak>
-            <theme-tweak
-              v-slot="{ id }"
-              :label="$t('tweaks.shift.label')"
-              :description="$t('tweaks.shift.description')"
-            >
-              <lib-input
-                :id="id"
-                v-model="tweaks.shift"
-                type="number"
-                placeholder="-1..1"
-                :min="-1"
-                :max="1"
-              />
-            </theme-tweak>
-            <theme-tweak
-              v-slot="{ id }"
-              :label="$t('tweaks.balance.label')"
-              :description="$t('tweaks.balance.description')"
-            >
-              <lib-input
-                :id="id"
-                v-model="tweaks.balance"
-                type="number"
-                placeholder="-1..1"
-                :min="-1"
-                :max="1"
-              />
-            </theme-tweak>
-          </div>
+          <theme-tweaks-form v-model="tweaks" :disabled="!theme" />
         </lib-disclosure>
       </section>
 
@@ -108,12 +51,17 @@
 
     <div class="tw-sticky tw-top-0 xs:tw-app-container sm:tw-h-screen tw-py-6 sm:tw-py-8 sm:tw-max-w-xl tw-w-full tw-mr-auto">
       <div class="tw-overflow-y-auto tw-bg-card xs:tw-rounded-xl tw-py-8 tw-app-container tw-flex-1 sm:tw--m-2">
-        <PalettePreview :colors="theme?.base" label="base" />
-        <PalettePreview
-          :colors="theme?.accent"
-          :semantic-names="semanticNames"
-          label="accent"
-        />
+        <template v-if="theme">
+          <PalettePreview :colors="theme.base" label="base" />
+          <PalettePreview
+            :colors="theme.accent"
+            :semantic-names="semanticNames"
+            label="accent"
+          />
+        </template>
+        <div v-else class="tw-py-4 tw-text-dim-3">
+          {{ $t('infoPlaceholder') }}
+        </div>
       </div>
     </div>
   </div>
@@ -122,6 +70,8 @@
 </template>
 
 <script setup lang="ts">
+import type { ThemeTweaks } from '../services/getTheme'
+
 // Render the image on file uploaded
 const fileInputValue = ref<File[]>([])
 const imageFile = computed(() => fileInputValue.value[0])
@@ -133,7 +83,7 @@ const image = ref<HTMLImageElement | null>(null)
 
 const { palette } = usePaletteByImageRef(image)
 
-const tweaks = reactive({
+const tweaks = ref<ThemeTweaks>({
   dim: 0,
   contrast: 1,
   shift: 0,
@@ -141,7 +91,7 @@ const tweaks = reactive({
 })
 
 const useThemeOptions = computed(() => ({
-  ...tweaks,
+  ...tweaks.value,
   volume: 12,
   accentsVolume: 9,
   maxAccents: 3,

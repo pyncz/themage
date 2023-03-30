@@ -6,6 +6,7 @@ errors:
   unexpected: We didn't expect it either
 goHome: Go to home page
 imageDefaultAlt: Uploaded image
+infoPlaceholder: Upload an image to get UI theme from its palette.
 madeBy: ' Made by'
 pages:
   index:
@@ -17,21 +18,28 @@ theme:
   image: From image
   light: Light
   system: System
-tweakTheme: Tweak theme
+tweakTheme: Adjust theme
 tweaks:
   balance:
-    description: Shift of the the light / dark balance (-1..1)
+    description: >-
+      Shift of the middle color (by lightness) into the light or the dark area
+      (-1..1)
     label: Balance
   contrast:
-    description: Сolor range width (0..1)
+    description: >-
+      Color range width (0..1). Set it to low if you want to cut off the
+      lightest and the darkest tones
     label: Contrast
   dim:
     description: Desaturate the colors (0..1)
     label: Dimness
   shift:
     description: >-
-      Shift of the color scale into light / dark area (-1..1). Applied only if
-      any non-default `contrast` value is provided
+      Shift of the color scale to the light or dark area (-1..1). Applied only
+      if any non-default `contrast` value is provided
     label: Shift
 uploadImage: Drop or select an image
 uploadNewImage: Change
+validations:
+  normal: The value should be from -1 to 1 inclusive
+  unormal: The value should be from 0 to 1 inclusive

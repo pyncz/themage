@@ -1,6 +1,6 @@
 <template>
   <radio-group
-    v-model="model"
+    v-model="modelValue"
     class="tw-flex tw-text-sm tw-border tw-border-dim-2 tw-p-1.5 tw-duration-fast tw-rounded tw-flex-col sm:tw-flex-row sm:tw-inline-flex"
     :disabled="disabled"
   >
@@ -32,7 +32,6 @@ type Value = any
 type Option = any
 
 interface Props {
-  modelValue: Value
   options?: Option[]
   disabled?: boolean
 
@@ -43,11 +42,13 @@ interface Props {
   getValue?: (_option: Option) => Value
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   options: () => [],
   getKey: (_option: Option, index: number) => index,
   getValue: (option: Option) => option,
 })
 
-const model = useVModel(props, 'modelValue')
+const { modelValue } = defineModel<{
+  modelValue: Value
+}>()
 </script>
