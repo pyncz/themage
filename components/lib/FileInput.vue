@@ -48,7 +48,7 @@ const clear = () => {
 }
 
 const onDrop = (droppedFiles: File[] | null) => {
-  files.value = droppedFiles ?? []
+  files.value = droppedFiles?.filter(file => /^image\//.test(file.type)) ?? []
 }
 
 const { isOverDropZone } = useDropZone(dropZoneRef, onDrop)
