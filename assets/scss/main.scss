@@ -16,6 +16,9 @@
   small {
     @apply tw-text-sm;
   }
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
   ::selection {
     @apply tw-text-accent-secondary tw-bg-dim-1;
   }
